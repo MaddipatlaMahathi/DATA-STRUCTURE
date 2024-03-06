@@ -1,0 +1,121 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node *next;
+}*n,*head,*tail;
+void Ins_Beg(int num){
+	n=(struct node *)malloc(sizeof(struct node));
+	n->data=num;
+	n->next=NULL;
+	if(head==NULL){
+		head=n;
+		tail=n;
+	}
+	else{
+		n->next=head;
+		head=n;
+	}
+}
+void Ins_Mid(int num, int mid)
+{
+    struct node* t;
+    n=(struct node*) malloc(sizeof(struct node));
+    n->data=num;
+    n->next=NULL;
+    for(t=head;t!=NULL;t=t->next)
+    {
+        t->data==mid;
+            break;
+        }
+        n->next=t->next;
+        t->next=n;
+}
+void Ins_End(int num)
+{
+    n=(struct node*) malloc(sizeof(struct node));
+    n->data=num;
+    n->next=NULL;
+    if(head==NULL)
+    {
+        head=n;
+        tail=n;
+    } else
+    {
+        tail->next=n;
+        tail=n;
+        n->next=NULL;
+    }
+}
+void Del_Beg()
+{
+    struct node *t;
+    t=head;
+    head=t->next;
+    free(t);
+}
+void Del_Mid(int mid)
+{
+    struct node *t,*tp;
+    t=head;
+    while(t->data!=mid){
+    	tp=t;
+    	t=t->next;
+	}
+	tp->next=t->next;
+	free(t);
+}
+void Del_End()
+{
+    struct node *t,*tp;
+    t=head;
+    while(t->next!=NULL){
+    	tp=t;
+    	t=t->next;
+	}
+	tail=tp;
+	free(t);
+}
+void display()
+{
+    struct node* t;
+    t=head;
+    while(t!=NULL)
+    {
+        printf("%d ", t->data);
+        t=t->next;
+    }
+}
+void search(int num)
+{
+    struct node *t;
+    for(t=head;t!=NULL;t=t->next)
+    {
+        if(t->data==num)
+        {
+            printf("Element found");
+            break;
+        }
+    }
+    if(t==NULL)
+    {
+        printf("Element not found");
+    }
+}
+int main(){
+	Ins_Beg(20);
+	Ins_Beg(10);
+	Ins_Mid(15,30);
+	Ins_End(40);
+	Ins_End(50);
+	printf("\nList :");
+	display();
+	Del_Beg();
+    Del_End();
+    Del_Mid(30);
+    printf("\nAfter deletion: \n");
+    display();
+    printf("\nSearching the input element: \n");
+    search(60);
+	return 0;
+}
