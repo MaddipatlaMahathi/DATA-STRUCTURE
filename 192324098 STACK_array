@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define size 5
+int top=-1,stack[size];
+struct node{
+	public:
+	int data;
+	struct node *next;
+}*n;
+struct node* createNode(int data)
+{
+	struct node* newNode = (struct node*)malloc(sizeof(struct node));
+	newNode->data = data;
+	newNode->next = NULL;
+	return newNode;
+}
+int isfull(){
+	if(top==size-1){
+	return 1;}
+	else{
+	return 0;
+}
+}
+int push(int data){
+	if(!isfull()){
+		top=top+1;
+		stack[top]=data;
+	}
+}
+int isempty(){
+	if(top==-1){
+	return 1;}
+	else{
+	return 0;
+}
+}
+int pop(int data){
+	if(!isempty()){
+		data=stack[top];
+		top=top-1;
+	}
+}
+int peek(){
+	printf("\t");
+	return stack[top];
+}
+void display(){
+	int i;
+	for(i=top;i>=0;i--){
+		printf("%d",stack[i]);
+		printf("\t");
+	}
+}
+int main(){
+	push(30);
+	push(54);
+	push(23);
+	push(45);
+	printf("The created elements in array:\n");
+	display();
+	pop(23);
+	printf("\nThe elements after deletion:\n");
+	display();
+	printf("\nElements in array :\n");
+	display();
+	printf("\nPeek element :%d",peek());
+}
